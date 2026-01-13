@@ -1,0 +1,39 @@
+<div class="donut-chart-container" [style.width.px]="size.width" [style.height.px]="size.height">
+  <h3 *ngIf="title" class="chart-title">{{ title }}</h3>
+  <dx-pie-chart
+    [dataSource]="chartData"
+    type="doughnut"
+    [innerRadius]="innerRadius"
+    [startAngle]="startAngle"
+    [endAngle]="endAngle"
+    [palette]="chartPalette"
+    [animation]="{ enabled: animationEnabled }"
+    [export]="{ enabled: exportEnabled }"
+    [tooltip]="{ enabled: true, customizeTooltip: customizeTooltip.bind(this) }"
+    [legend]="{
+      visible: showLegend,
+      horizontalAlignment: 'right',
+      verticalAlignment: 'top',
+      margin: {
+        left: 20
+      }
+    }"
+    [label]="{
+      visible: showLabels,
+      connector: {
+        visible: true,
+        width: 1
+      },
+      customizeText: customizeLabel.bind(this)
+    }"
+    [size]="{
+      width: size.width,
+      height: size.height
+    }"
+  >
+    <dxi-series
+      argumentField="category"
+      valueField="value">
+    </dxi-series>
+  </dx-pie-chart>
+</div>

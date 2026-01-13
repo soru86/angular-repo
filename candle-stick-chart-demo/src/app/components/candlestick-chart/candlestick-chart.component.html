@@ -1,0 +1,51 @@
+<div class="chart-wrapper">
+  <div class="chart-controls">
+    <div class="control-group">
+      <label for="symbol-select">Symbol:</label>
+      <select 
+        id="symbol-select" 
+        [(ngModel)]="selectedSymbol" 
+        (change)="onSymbolChange()"
+        class="control-select">
+        <option *ngFor="let symbol of symbols" [value]="symbol.value">
+          {{ symbol.label }}
+        </option>
+      </select>
+    </div>
+
+    <div class="control-group">
+      <label for="interval-select">Interval:</label>
+      <select 
+        id="interval-select" 
+        [(ngModel)]="selectedInterval" 
+        (change)="onIntervalChange()"
+        class="control-select">
+        <option *ngFor="let interval of intervals" [value]="interval.value">
+          {{ interval.label }}
+        </option>
+      </select>
+    </div>
+
+    <div class="control-group">
+      <button 
+        *ngIf="!isConnected" 
+        (click)="connect()" 
+        class="btn btn-connect">
+        Connect
+      </button>
+      <button 
+        *ngIf="isConnected" 
+        (click)="disconnect()" 
+        class="btn btn-disconnect">
+        Disconnect
+      </button>
+    </div>
+
+    <div class="status-indicator">
+      <span class="status-dot" [class.connected]="isConnected"></span>
+      <span class="status-text">{{ connectionStatus }}</span>
+    </div>
+  </div>
+
+  <div #chartContainer class="chart-container"></div>
+</div>
